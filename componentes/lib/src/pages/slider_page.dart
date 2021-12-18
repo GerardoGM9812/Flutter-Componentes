@@ -9,6 +9,7 @@ class SliderPage extends StatefulWidget {
 
 class _SliderPageState extends State<SliderPage> {
   double _value = 200.0;
+  bool _bloquearCheck = false;
 
   @override
   Widget build(BuildContext context) {
@@ -21,6 +22,8 @@ class _SliderPageState extends State<SliderPage> {
         child: Column(
           children: [
             _crearSlider(),
+            _crearCheckBox(),
+            _crearSwitch(),
             Expanded(
               child: _crearImagen(),
             ),
@@ -37,11 +40,13 @@ class _SliderPageState extends State<SliderPage> {
       value: _value,
       min: 10.0,
       max: 400.0,
-      onChanged: (valor) {
-        setState(() {
-          _value = valor;
-        });
-      },
+      onChanged: (_bloquearCheck)
+          ? null
+          : (valor) {
+              setState(() {
+                _value = valor;
+              });
+            },
     );
   }
 
@@ -51,6 +56,30 @@ class _SliderPageState extends State<SliderPage> {
           'https://static.zerochan.net/Eren.Jaeger.full.3204659.png'),
       width: _value,
       fit: BoxFit.contain,
+    );
+  }
+
+  Widget _crearCheckBox() {
+    return CheckboxListTile(
+      value: _bloquearCheck,
+      onChanged: (value) {
+        setState(() {
+          _bloquearCheck = value!;
+        });
+      },
+      title: const Text('Bloquear Slider'),
+    );
+  }
+
+  Widget _crearSwitch() {
+    return SwitchListTile(
+      value: _bloquearCheck,
+      onChanged: (value) {
+        setState(() {
+          _bloquearCheck = value;
+        });
+      },
+      title: const Text('Bloquear Slider'),
     );
   }
 }
