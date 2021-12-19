@@ -53,13 +53,17 @@ class ListaPageState extends State<ListaPage> {
     return RefreshIndicator(
       onRefresh: _recargarPagina,
       child: ListView.builder(
+        padding: const EdgeInsets.only(left: 15.0, right: 15.0),
         controller: _scrollController,
         itemCount: _listaNumeros.length,
         itemBuilder: (BuildContext context, int index) {
           final imagen = _listaNumeros[index];
-          return FadeInImage(
-            placeholder: const AssetImage('assets/jar-loading.gif'),
-            image: NetworkImage('https://picsum.photos/id/$imagen/500/300'),
+          return Container(
+            padding: const EdgeInsets.only(top: 10.0),
+            child: FadeInImage(
+              placeholder: const AssetImage('assets/jar-loading.gif'),
+              image: NetworkImage('https://picsum.photos/id/$imagen/500/300'),
+            ),
           );
         },
       ),
